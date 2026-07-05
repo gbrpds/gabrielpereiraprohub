@@ -21,61 +21,49 @@ body {
   background-color: #050505;
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
-  /* Discreet static orange gradients layered over near-black. */
+  /* Discreet static orange gradients over near-black. Painted once (no
+     background-attachment: fixed, which forces a full repaint on scroll). */
   background-image:
-    radial-gradient(60% 50% at 15% 0%, rgba(251, 146, 60, 0.08) 0%, rgba(251, 146, 60, 0) 60%),
-    radial-gradient(50% 45% at 100% 20%, rgba(249, 115, 22, 0.07) 0%, rgba(249, 115, 22, 0) 55%),
-    radial-gradient(55% 50% at 50% 100%, rgba(251, 146, 60, 0.05) 0%, rgba(251, 146, 60, 0) 60%);
-  background-attachment: fixed;
+    radial-gradient(60% 50% at 15% 0%, rgba(251, 146, 60, 0.07) 0%, rgba(251, 146, 60, 0) 60%),
+    radial-gradient(50% 45% at 100% 20%, rgba(249, 115, 22, 0.06) 0%, rgba(249, 115, 22, 0) 55%),
+    radial-gradient(55% 50% at 50% 100%, rgba(251, 146, 60, 0.045) 0%, rgba(251, 146, 60, 0) 60%);
 }
 
+/* A single fixed, cheap glow. Uses opacity pulsing (compositor-only, no
+   re-rasterization) instead of a large animated blur, so it doesn't cost
+   paint on every frame. */
 .ambient-glow {
   position: fixed;
-  inset: 0;
+  top: -10%;
+  left: 50%;
+  width: 700px;
+  height: 700px;
+  margin-left: -350px;
   z-index: 0;
   pointer-events: none;
-  overflow: hidden;
-}
-
-.ambient-glow::before {
-  content: "";
-  position: absolute;
-  width: 55vw;
-  height: 55vw;
-  min-width: 520px;
-  min-height: 520px;
-  left: 50%;
-  top: 40%;
+  border-radius: 9999px;
   background: radial-gradient(
     circle,
-    rgba(251, 146, 60, 0.1) 0%,
-    rgba(251, 146, 60, 0.04) 40%,
+    rgba(251, 146, 60, 0.09) 0%,
+    rgba(251, 146, 60, 0.03) 45%,
     rgba(251, 146, 60, 0) 70%
   );
-  animation: drift 26s ease-in-out infinite;
-  filter: blur(20px);
+  will-change: opacity;
+  animation: glow-pulse 12s ease-in-out infinite;
 }
 
-@keyframes drift {
-  0% {
-    transform: translate(-65%, -55%) scale(1);
-  }
-  25% {
-    transform: translate(-35%, -70%) scale(1.12);
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.7;
   }
   50% {
-    transform: translate(-45%, -35%) scale(0.95);
-  }
-  75% {
-    transform: translate(-60%, -50%) scale(1.08);
-  }
-  100% {
-    transform: translate(-65%, -55%) scale(1);
+    opacity: 1;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ambient-glow::before {
+  .ambient-glow {
     animation: none;
   }
 }
