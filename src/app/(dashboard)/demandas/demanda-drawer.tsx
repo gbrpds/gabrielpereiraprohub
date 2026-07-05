@@ -83,7 +83,7 @@ export function DemandaDrawer({ id, onClose }: { id: string; onClose: () => void
                   name="title"
                   defaultValue={detail.demanda.title}
                   required
-                  className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
+                  className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
                 />
               </div>
               <div>
@@ -91,7 +91,7 @@ export function DemandaDrawer({ id, onClose }: { id: string; onClose: () => void
                 <select
                   name="status"
                   defaultValue={detail.demanda.status}
-                  className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
+                  className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
                 >
                   {DEMANDA_STATUS_ORDER.map((status) => (
                     <option key={status} value={status}>
@@ -109,7 +109,7 @@ export function DemandaDrawer({ id, onClose }: { id: string; onClose: () => void
                     type="date"
                     name="due_date"
                     defaultValue={detail.demanda.due_date ?? ""}
-                    className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
+                    className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
                   />
                 </div>
                 <div>
@@ -120,7 +120,7 @@ export function DemandaDrawer({ id, onClose }: { id: string; onClose: () => void
                     type="date"
                     name="publish_date"
                     defaultValue={detail.demanda.publish_date ?? ""}
-                    className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
+                    className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
                   />
                 </div>
               </div>
@@ -132,12 +132,12 @@ export function DemandaDrawer({ id, onClose }: { id: string; onClose: () => void
                   name="description"
                   rows={5}
                   defaultValue={detail.demanda.description ?? ""}
-                  className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
+                  className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
                 />
               </div>
               <button
                 type="submit"
-                className="bg-orange-600 px-4 py-2 text-sm font-medium text-black hover:bg-orange-500"
+                className="bg-orange-500 px-4 py-2 text-sm font-medium text-black hover:bg-orange-400"
               >
                 Salvar
               </button>
@@ -158,7 +158,7 @@ export function DemandaDrawer({ id, onClose }: { id: string; onClose: () => void
                         href={attachment.url ?? "#"}
                         target="_blank"
                         rel="noreferrer"
-                        className="mb-2 block h-32 truncate border border-neutral-800 p-2 text-xs text-orange-400 underline"
+                        className="mb-2 block h-32 truncate border border-neutral-800 p-2 text-xs text-orange-300 underline"
                       >
                         {attachment.file_name}
                       </a>
@@ -188,12 +188,12 @@ export function DemandaDrawer({ id, onClose }: { id: string; onClose: () => void
                   ref={captionInputRef}
                   type="text"
                   placeholder="Legenda (opcional)"
-                  className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
+                  className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
                 />
                 <button
                   type="submit"
                   disabled={uploading}
-                  className="bg-orange-600 px-4 py-2 text-sm font-medium text-black hover:bg-orange-500 disabled:opacity-50"
+                  className="bg-orange-500 px-4 py-2 text-sm font-medium text-black hover:bg-orange-400 disabled:opacity-50"
                 >
                   {uploading ? "Enviando..." : "Anexar entrega"}
                 </button>

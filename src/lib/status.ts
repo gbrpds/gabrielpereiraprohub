@@ -17,9 +17,9 @@ export const DEMANDA_STATUS_LABEL: Record<DemandaStatus, string> = {
 };
 
 export const DEMANDA_STATUS_BADGE: Record<DemandaStatus, string> = {
-  recebida: "border border-neutral-700 text-neutral-300",
-  em_producao: "border border-orange-700 text-orange-400",
-  em_aprovacao: "border border-yellow-700 text-yellow-400",
-  programar: "border border-blue-700 text-blue-400",
-  concluido: "border border-emerald-700 text-emerald-400",
+  recebida: "border border-neutral-600 text-neutral-300",
+  em_producao: "border border-orange-500 text-orange-400",
+  em_aprovacao: "border border-yellow-500 text-yellow-300",
+  programar: "border border-sky-500 text-sky-300",
+  concluido: "border border-emerald-500 text-emerald-300",
 };

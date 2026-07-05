@@ -15,7 +15,7 @@ export default async function DemandasPage() {
         <h1 className="text-2xl font-semibold text-white">Demandas</h1>
         <Link
           href="/demandas/nova"
-          className="bg-orange-600 px-4 py-2 text-sm font-medium text-black hover:bg-orange-500"
+          className="bg-orange-500 px-4 py-2 text-sm font-medium text-black hover:bg-orange-400"
         >
           Nova demanda
         </Link>

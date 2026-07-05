@@ -27,7 +27,7 @@ export default async function LoginPage({
               name="email"
               type="email"
               required
-              className="w-full rounded-md border border-neutral-700 px-3 py-2 text-sm focus:border-orange-600 focus:outline-none"
+              className="w-full rounded-md border border-neutral-700 px-3 py-2 text-sm focus:border-orange-500 focus:outline-none"
             />
           </div>
           <div>
@@ -39,12 +39,12 @@ export default async function LoginPage({
               name="password"
               type="password"
               required
-              className="w-full rounded-md border border-neutral-700 px-3 py-2 text-sm focus:border-orange-600 focus:outline-none"
+              className="w-full rounded-md border border-neutral-700 px-3 py-2 text-sm focus:border-orange-500 focus:outline-none"
             />
           </div>
           <button
             type="submit"
-            className="w-full rounded-md bg-orange-600 px-3 py-2 text-sm font-medium text-black transition hover:bg-orange-500"
+            className="w-full rounded-md bg-orange-500 px-3 py-2 text-sm font-medium text-black transition hover:bg-orange-400"
           >
             Entrar
           </button>

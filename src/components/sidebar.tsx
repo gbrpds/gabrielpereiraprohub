@@ -9,6 +9,7 @@ const links = [
   { href: "/clientes", label: "Clientes" },
   { href: "/demandas", label: "Demandas" },
   { href: "/cronograma", label: "Cronograma" },
+  { href: "/financeiro", label: "Financeiro" },
 ];
 
 export function Sidebar() {
@@ -37,7 +38,7 @@ export function Sidebar() {
                 href={link.href}
                 className={`block px-3 py-2 text-sm font-medium transition ${
                   active
-                    ? "bg-orange-600 text-black"
+                    ? "bg-orange-500 text-black"
                     : "text-neutral-400 hover:bg-neutral-900 hover:text-white"
                 }`}
               >

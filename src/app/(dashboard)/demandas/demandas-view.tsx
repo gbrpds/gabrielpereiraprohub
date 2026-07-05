@@ -18,7 +18,7 @@ export function DemandasView({ demandas }: { demandas: DemandaWithClient[] }) {
         <button
           onClick={() => setView("lista")}
           className={`px-4 py-2 ${
-            view === "lista" ? "bg-orange-600 text-black" : "bg-neutral-950 text-neutral-400 hover:text-white"
+            view === "lista" ? "bg-orange-500 text-black" : "bg-neutral-950 text-neutral-400 hover:text-white"
           }`}
         >
           Lista
@@ -26,7 +26,7 @@ export function DemandasView({ demandas }: { demandas: DemandaWithClient[] }) {
         <button
           onClick={() => setView("kanban")}
           className={`px-4 py-2 ${
-            view === "kanban" ? "bg-orange-600 text-black" : "bg-neutral-950 text-neutral-400 hover:text-white"
+            view === "kanban" ? "bg-orange-500 text-black" : "bg-neutral-950 text-neutral-400 hover:text-white"
           }`}
         >
           Kanban

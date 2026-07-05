@@ -14,7 +14,7 @@ export default async function ClientesPage() {
         <h1 className="text-2xl font-semibold text-white">Clientes</h1>
         <Link
           href="/clientes/novo"
-          className="rounded-md bg-orange-600 px-4 py-2 text-sm font-medium text-black hover:bg-orange-500"
+          className="rounded-md bg-orange-500 px-4 py-2 text-sm font-medium text-black hover:bg-orange-400"
         >
           Novo cliente
         </Link>

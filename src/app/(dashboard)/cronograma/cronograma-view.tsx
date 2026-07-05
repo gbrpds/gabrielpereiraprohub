@@ -51,7 +51,7 @@ export function CronogramaView({
         <select
           value={clientId}
           onChange={(e) => setClientId(e.target.value)}
-          className="border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
+          className="border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
         >
           {clients.map((c) => (
             <option key={c.id} value={c.id}>
@@ -63,7 +63,7 @@ export function CronogramaView({
         <div className="flex items-center gap-3">
           <button
             onClick={() => setMonth((m) => subMonths(m, 1))}
-            className="border border-neutral-700 px-3 py-1.5 text-sm text-neutral-300 hover:border-orange-600 hover:text-white"
+            className="border border-neutral-700 px-3 py-1.5 text-sm text-neutral-300 hover:border-orange-500 hover:text-white"
           >
             ←
           </button>
@@ -72,7 +72,7 @@ export function CronogramaView({
           </span>
           <button
             onClick={() => setMonth((m) => addMonths(m, 1))}
-            className="border border-neutral-700 px-3 py-1.5 text-sm text-neutral-300 hover:border-orange-600 hover:text-white"
+            className="border border-neutral-700 px-3 py-1.5 text-sm text-neutral-300 hover:border-orange-500 hover:text-white"
           >
             →
           </button>

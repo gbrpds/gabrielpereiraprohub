@@ -31,7 +31,7 @@ export default async function NovaDemandaPage({
             name="client_id"
             required
             defaultValue={client_id ?? ""}
-            className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
+            className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
           >
             <option value="" disabled>
               Selecione um cliente
@@ -48,7 +48,7 @@ export default async function NovaDemandaPage({
           <input
             name="title"
             required
-            className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
+            className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
           />
         </div>
         <div>
@@ -56,7 +56,7 @@ export default async function NovaDemandaPage({
           <textarea
             name="description"
             rows={4}
-            className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
+            className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
           />
         </div>
         <div className="grid grid-cols-2 gap-4">
@@ -67,7 +67,7 @@ export default async function NovaDemandaPage({
             <input
               type="date"
               name="due_date"
-              className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
+              className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
             />
           </div>
           <div>
@@ -77,7 +77,7 @@ export default async function NovaDemandaPage({
             <input
               type="date"
               name="publish_date"
-              className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
+              className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-500 focus:outline-none"
             />
           </div>
         </div>
@@ -87,7 +87,7 @@ export default async function NovaDemandaPage({
         </p>
         <button
           type="submit"
-          className="w-full bg-orange-600 px-3 py-2 text-sm font-medium text-black hover:bg-orange-500"
+          className="w-full bg-orange-500 px-3 py-2 text-sm font-medium text-black hover:bg-orange-400"
         >
           Criar demanda
         </button>

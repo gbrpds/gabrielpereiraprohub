@@ -37,7 +37,7 @@ export default async function DashboardPage() {
           <Link
             key={card.label}
             href={card.href}
-            className="border border-neutral-800 bg-neutral-950 p-5 shadow-sm transition hover:border-orange-700"
+            className="border border-neutral-800 bg-neutral-950 p-5 shadow-sm transition hover:border-orange-500"
           >
             <p className="text-sm text-neutral-500">{card.label}</p>
             <p className="mt-2 text-3xl font-semibold text-white">{card.value}</p>

@@ -48,7 +48,7 @@ export function ListView({
                     <td className="whitespace-nowrap px-4 py-3 text-neutral-500">
                       {demanda.due_date ? `Entrega ${demanda.due_date}` : ""}
                     </td>
-                    <td className="whitespace-nowrap px-4 py-3 text-orange-400">
+                    <td className="whitespace-nowrap px-4 py-3 text-orange-300">
                       {demanda.publish_date ? `Publica ${demanda.publish_date}` : ""}
                     </td>
                     <td className="whitespace-nowrap px-4 py-3">
@@ -59,7 +59,7 @@ export function ListView({
                             updateDemandaStatus(demanda.id, e.target.value as DemandaStatus)
                           )
                         }
-                        className="border border-neutral-700 bg-black px-2 py-1 text-xs text-white focus:border-orange-600 focus:outline-none"
+                        className="border border-neutral-700 bg-black px-2 py-1 text-xs text-white focus:border-orange-500 focus:outline-none"
                       >
                         {DEMANDA_STATUS_ORDER.map((s) => (
                           <option key={s} value={s}>

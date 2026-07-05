@@ -68,14 +68,14 @@ export function KanbanBoard({
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             onClick={() => onSelect(demanda.id)}
-                            className={`cursor-pointer border border-neutral-800 bg-black p-3 shadow-sm transition hover:border-orange-700 ${
-                              snapshot.isDragging ? "ring-1 ring-orange-600" : ""
+                            className={`cursor-pointer border border-neutral-800 bg-black p-3 shadow-sm transition hover:border-orange-500 ${
+                              snapshot.isDragging ? "ring-1 ring-orange-500" : ""
                             }`}
                           >
                             <p className="mb-1 text-sm font-medium text-white">{demanda.title}</p>
                             <p className="text-xs text-neutral-500">{demanda.clients?.name}</p>
                             {demanda.publish_date && (
-                              <p className="mt-2 text-xs text-orange-400">
+                              <p className="mt-2 text-xs text-orange-300">
                                 Publica em {demanda.publish_date}
                               </p>
                             )}
