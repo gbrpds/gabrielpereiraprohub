@@ -11,18 +11,18 @@ export default async function ClientesPage() {
   return (
     <div>
       <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-neutral-900">Clientes</h1>
+        <h1 className="text-2xl font-semibold text-white">Clientes</h1>
         <Link
           href="/clientes/novo"
-          className="rounded-md bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-700"
+          className="rounded-md bg-orange-600 px-4 py-2 text-sm font-medium text-black hover:bg-orange-500"
         >
           Novo cliente
         </Link>
       </div>
 
-      <div className="overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm">
+      <div className="overflow-hidden rounded-xl border border-neutral-800 bg-neutral-950 shadow-sm">
         <table className="w-full text-left text-sm">
-          <thead className="bg-neutral-50 text-neutral-500">
+          <thead className="bg-black text-neutral-500">
             <tr>
               <th className="px-4 py-3 font-medium">Nome</th>
               <th className="px-4 py-3 font-medium">Empresa</th>
@@ -33,20 +33,20 @@ export default async function ClientesPage() {
           </thead>
           <tbody>
             {(clients ?? []).map((client) => (
-              <tr key={client.id} className="border-t border-neutral-100 hover:bg-neutral-50">
+              <tr key={client.id} className="border-t border-neutral-900 hover:bg-black">
                 <td className="px-4 py-3">
-                  <Link href={`/clientes/${client.id}`} className="font-medium text-neutral-900">
+                  <Link href={`/clientes/${client.id}`} className="font-medium text-white">
                     {client.name}
                   </Link>
                 </td>
-                <td className="px-4 py-3 text-neutral-600">{client.company ?? "—"}</td>
-                <td className="px-4 py-3 text-neutral-600">{client.email}</td>
+                <td className="px-4 py-3 text-neutral-400">{client.company ?? "—"}</td>
+                <td className="px-4 py-3 text-neutral-400">{client.email}</td>
                 <td className="px-4 py-3">
                   <span
-                    className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                    className={`border px-2 py-0.5 text-xs font-medium ${
                       client.auth_user_id
-                        ? "bg-emerald-50 text-emerald-700"
-                        : "bg-neutral-100 text-neutral-500"
+                        ? "border-emerald-700 text-emerald-400"
+                        : "border-neutral-700 text-neutral-500"
                     }`}
                   >
                     {client.auth_user_id ? "Convidado" : "Sem acesso"}
@@ -54,10 +54,10 @@ export default async function ClientesPage() {
                 </td>
                 <td className="px-4 py-3">
                   <span
-                    className={`rounded-full px-2 py-0.5 text-xs font-medium ${
+                    className={`border px-2 py-0.5 text-xs font-medium ${
                       client.active
-                        ? "bg-emerald-50 text-emerald-700"
-                        : "bg-neutral-100 text-neutral-500"
+                        ? "border-emerald-700 text-emerald-400"
+                        : "border-neutral-700 text-neutral-500"
                     }`}
                   >
                     {client.active ? "Ativo" : "Inativo"}

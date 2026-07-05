@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #000000;
+  --foreground: #f5f5f5;
 }
 
 @theme inline {
@@ -10,17 +10,66 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --radius-none: 0px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-radius: 0 !important;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+.ambient-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.ambient-glow::before {
+  content: "";
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  min-width: 600px;
+  min-height: 600px;
+  left: 50%;
+  top: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(249, 115, 22, 0.16) 0%,
+    rgba(249, 115, 22, 0.06) 35%,
+    rgba(249, 115, 22, 0) 70%
+  );
+  animation: drift 22s ease-in-out infinite;
+  filter: blur(10px);
+}
+
+@keyframes drift {
+  0% {
+    transform: translate(-70%, -60%) scale(1);
+  }
+  25% {
+    transform: translate(-30%, -75%) scale(1.15);
+  }
+  50% {
+    transform: translate(-40%, -30%) scale(0.95);
+  }
+  75% {
+    transform: translate(-65%, -45%) scale(1.1);
+  }
+  100% {
+    transform: translate(-70%, -60%) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-glow::before {
+    animation: none;
+  }
 }

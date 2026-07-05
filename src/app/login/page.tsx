@@ -8,18 +8,18 @@ export default async function LoginPage({
   const { error } = await searchParams;
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-neutral-50 px-4">
-      <div className="w-full max-w-sm rounded-xl border border-neutral-200 bg-white p-8 shadow-sm">
-        <h1 className="mb-1 text-xl font-semibold text-neutral-900">Hub</h1>
+    <div className="flex min-h-screen items-center justify-center bg-black px-4">
+      <div className="w-full max-w-sm rounded-xl border border-neutral-800 bg-neutral-950 p-8 shadow-sm">
+        <h1 className="mb-1 text-xl font-semibold text-white">Hub</h1>
         <p className="mb-6 text-sm text-neutral-500">Acesso da equipe interna</p>
 
         {error && (
-          <p className="mb-4 rounded-md bg-red-50 px-3 py-2 text-sm text-red-600">{error}</p>
+          <p className="mb-4 rounded-md bg-red-950 px-3 py-2 text-sm text-red-400">{error}</p>
         )}
 
         <form action={login} className="space-y-4">
           <div>
-            <label htmlFor="email" className="mb-1 block text-sm font-medium text-neutral-700">
+            <label htmlFor="email" className="mb-1 block text-sm font-medium text-neutral-300">
               E-mail
             </label>
             <input
@@ -27,11 +27,11 @@ export default async function LoginPage({
               name="email"
               type="email"
               required
-              className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-neutral-900 focus:outline-none"
+              className="w-full rounded-md border border-neutral-700 px-3 py-2 text-sm focus:border-orange-600 focus:outline-none"
             />
           </div>
           <div>
-            <label htmlFor="password" className="mb-1 block text-sm font-medium text-neutral-700">
+            <label htmlFor="password" className="mb-1 block text-sm font-medium text-neutral-300">
               Senha
             </label>
             <input
@@ -39,12 +39,12 @@ export default async function LoginPage({
               name="password"
               type="password"
               required
-              className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-neutral-900 focus:outline-none"
+              className="w-full rounded-md border border-neutral-700 px-3 py-2 text-sm focus:border-orange-600 focus:outline-none"
             />
           </div>
           <button
             type="submit"
-            className="w-full rounded-md bg-neutral-900 px-3 py-2 text-sm font-medium text-white transition hover:bg-neutral-700"
+            className="w-full rounded-md bg-orange-600 px-3 py-2 text-sm font-medium text-black transition hover:bg-orange-500"
           >
             Entrar
           </button>

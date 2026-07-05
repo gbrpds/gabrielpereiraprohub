@@ -4,32 +4,34 @@ import { createDemanda } from "../actions";
 export default async function NovaDemandaPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; client_id?: string }>;
 }) {
-  const { error } = await searchParams;
+  const { error, client_id } = await searchParams;
   const supabase = await createClient();
 
-  const [{ data: clients }, { data: projects }] = await Promise.all([
-    supabase.from("clients").select("id, name").order("name"),
-    supabase.from("projects").select("id, name, client_id").order("name"),
-  ]);
+  const { data: clients } = await supabase.from("clients").select("id, name").order("name");
 
   return (
     <div className="max-w-xl">
-      <h1 className="mb-6 text-2xl font-semibold text-neutral-900">Nova demanda</h1>
+      <h1 className="mb-6 text-2xl font-semibold text-white">Nova demanda</h1>
 
       {error && (
-        <p className="mb-4 rounded-md bg-red-50 px-3 py-2 text-sm text-red-600">{error}</p>
+        <p className="mb-4 border border-red-800 bg-red-950 px-3 py-2 text-sm text-red-400">
+          {error}
+        </p>
       )}
 
-      <form action={createDemanda} className="space-y-4 rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+      <form
+        action={createDemanda}
+        className="space-y-4 border border-neutral-800 bg-neutral-950 p-6 shadow-sm"
+      >
         <div>
-          <label className="mb-1 block text-sm font-medium text-neutral-700">Cliente</label>
+          <label className="mb-1 block text-sm font-medium text-neutral-300">Cliente</label>
           <select
             name="client_id"
             required
-            defaultValue=""
-            className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-neutral-900 focus:outline-none"
+            defaultValue={client_id ?? ""}
+            className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
           >
             <option value="" disabled>
               Selecione um cliente
@@ -42,63 +44,50 @@ export default async function NovaDemandaPage({
           </select>
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium text-neutral-700">
-            Projeto (opcional)
-          </label>
-          <select
-            name="project_id"
-            className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-neutral-900 focus:outline-none"
-          >
-            <option value="">Nenhum</option>
-            {(projects ?? []).map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <label className="mb-1 block text-sm font-medium text-neutral-700">Título</label>
+          <label className="mb-1 block text-sm font-medium text-neutral-300">Título</label>
           <input
             name="title"
             required
-            className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-neutral-900 focus:outline-none"
+            className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
           />
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium text-neutral-700">Descrição</label>
+          <label className="mb-1 block text-sm font-medium text-neutral-300">Descrição</label>
           <textarea
             name="description"
-            rows={3}
-            className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-neutral-900 focus:outline-none"
+            rows={4}
+            className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
           />
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="mb-1 block text-sm font-medium text-neutral-700">Prioridade</label>
-            <select
-              name="priority"
-              defaultValue="media"
-              className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-neutral-900 focus:outline-none"
-            >
-              <option value="baixa">Baixa</option>
-              <option value="media">Média</option>
-              <option value="alta">Alta</option>
-              <option value="urgente">Urgente</option>
-            </select>
-          </div>
-          <div>
-            <label className="mb-1 block text-sm font-medium text-neutral-700">Prazo</label>
+            <label className="mb-1 block text-sm font-medium text-neutral-300">
+              Data de entrega
+            </label>
             <input
               type="date"
               name="due_date"
-              className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-neutral-900 focus:outline-none"
+              className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-neutral-300">
+              Data de publicação
+            </label>
+            <input
+              type="date"
+              name="publish_date"
+              className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
             />
           </div>
         </div>
+        <p className="text-xs text-neutral-500">
+          Ao definir a data de publicação, a demanda aparece automaticamente no Cronograma nessa
+          data.
+        </p>
         <button
           type="submit"
-          className="w-full rounded-md bg-neutral-900 px-3 py-2 text-sm font-medium text-white hover:bg-neutral-700"
+          className="w-full bg-orange-600 px-3 py-2 text-sm font-medium text-black hover:bg-orange-500"
         >
           Criar demanda
         </button>

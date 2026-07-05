@@ -7,8 +7,8 @@ import { createClient } from "@/lib/supabase/client";
 const links = [
   { href: "/", label: "Dashboard" },
   { href: "/clientes", label: "Clientes" },
-  { href: "/projetos", label: "Projetos" },
   { href: "/demandas", label: "Demandas" },
+  { href: "/cronograma", label: "Cronograma" },
 ];
 
 export function Sidebar() {
@@ -23,9 +23,11 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="flex h-screen w-56 flex-col justify-between border-r border-neutral-200 bg-white px-4 py-6">
+    <aside className="flex h-screen w-56 flex-col justify-between border-r border-neutral-800 bg-black px-4 py-6">
       <div>
-        <p className="mb-8 px-2 text-lg font-semibold text-neutral-900">Hub</p>
+        <p className="mb-8 px-2 text-lg font-semibold uppercase tracking-wide text-white">
+          Hub
+        </p>
         <nav className="space-y-1">
           {links.map((link) => {
             const active = link.href === "/" ? pathname === "/" : pathname.startsWith(link.href);
@@ -33,10 +35,10 @@ export function Sidebar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`block rounded-md px-3 py-2 text-sm font-medium transition ${
+                className={`block px-3 py-2 text-sm font-medium transition ${
                   active
-                    ? "bg-neutral-900 text-white"
-                    : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
+                    ? "bg-orange-600 text-black"
+                    : "text-neutral-400 hover:bg-neutral-900 hover:text-white"
                 }`}
               >
                 {link.label}
@@ -47,7 +49,7 @@ export function Sidebar() {
       </div>
       <button
         onClick={handleLogout}
-        className="rounded-md px-3 py-2 text-left text-sm font-medium text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900"
+        className="px-3 py-2 text-left text-sm font-medium text-neutral-500 hover:bg-neutral-900 hover:text-white"
       >
         Sair
       </button>

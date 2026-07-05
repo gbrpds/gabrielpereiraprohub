@@ -2,8 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { updateClientRecord, inviteClientUser } from "../actions";
-import { PROJETO_STATUS_BADGE, PROJETO_STATUS_LABEL } from "@/lib/status";
-import type { ProjetoStatus } from "@/types/database";
+import { DEMANDA_STATUS_BADGE, DEMANDA_STATUS_LABEL } from "@/lib/status";
+import type { DemandaStatus } from "@/types/database";
 
 export default async function ClienteDetailPage({
   params,
@@ -13,13 +13,14 @@ export default async function ClienteDetailPage({
   const { id } = await params;
   const supabase = await createClient();
 
-  const [{ data: client }, { data: projects }] = await Promise.all([
+  const [{ data: client }, { data: demandas }] = await Promise.all([
     supabase.from("clients").select("*").eq("id", id).single(),
     supabase
-      .from("projects")
-      .select("id, name, status")
+      .from("demandas")
+      .select("id, title, status")
       .eq("client_id", id)
-      .order("created_at", { ascending: false }),
+      .order("created_at", { ascending: false })
+      .limit(8),
   ]);
 
   if (!client) notFound();
@@ -30,22 +31,22 @@ export default async function ClienteDetailPage({
   return (
     <div className="max-w-3xl space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold text-neutral-900">{client.name}</h1>
+        <h1 className="text-2xl font-semibold text-white">{client.name}</h1>
         <p className="text-sm text-neutral-500">{client.company}</p>
       </div>
 
-      <div className="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+      <div className="border border-neutral-800 bg-neutral-950 p-6 shadow-sm">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-sm font-semibold text-neutral-900">Acesso ao Portal</h2>
+          <h2 className="text-sm font-semibold text-white">Acesso ao Portal</h2>
           {client.auth_user_id ? (
-            <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-700">
+            <span className="border border-emerald-700 px-2 py-0.5 text-xs font-medium text-emerald-400">
               Convidado
             </span>
           ) : (
             <form action={inviteAction}>
               <button
                 type="submit"
-                className="rounded-md bg-neutral-900 px-3 py-1.5 text-xs font-medium text-white hover:bg-neutral-700"
+                className="bg-orange-600 px-3 py-1.5 text-xs font-medium text-black hover:bg-orange-500"
               >
                 Enviar convite
               </button>
@@ -56,93 +57,99 @@ export default async function ClienteDetailPage({
         <form action={updateAction} className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="mb-1 block text-sm font-medium text-neutral-700">Nome</label>
+              <label className="mb-1 block text-sm font-medium text-neutral-300">Nome</label>
               <input
                 name="name"
                 defaultValue={client.name}
                 required
-                className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-neutral-900 focus:outline-none"
+                className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
               />
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-neutral-700">Empresa</label>
+              <label className="mb-1 block text-sm font-medium text-neutral-300">Empresa</label>
               <input
                 name="company"
                 defaultValue={client.company ?? ""}
-                className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-neutral-900 focus:outline-none"
+                className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
               />
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-neutral-700">E-mail</label>
+              <label className="mb-1 block text-sm font-medium text-neutral-300">E-mail</label>
               <input
                 name="email"
                 type="email"
                 defaultValue={client.email}
                 required
-                className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-neutral-900 focus:outline-none"
+                className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
               />
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium text-neutral-700">Telefone</label>
+              <label className="mb-1 block text-sm font-medium text-neutral-300">Telefone</label>
               <input
                 name="phone"
                 defaultValue={client.phone ?? ""}
-                className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-neutral-900 focus:outline-none"
+                className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
               />
             </div>
           </div>
-          <div>
-            <label className="mb-1 block text-sm font-medium text-neutral-700">Observações</label>
-            <textarea
-              name="notes"
-              rows={3}
-              defaultValue={client.notes ?? ""}
-              className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm focus:border-neutral-900 focus:outline-none"
-            />
-          </div>
-          <label className="flex items-center gap-2 text-sm text-neutral-700">
+          <label className="flex items-center gap-2 text-sm text-neutral-300">
             <input
               type="checkbox"
               name="active"
               defaultChecked={client.active}
-              className="rounded border-neutral-300"
+              className="border-neutral-700"
             />
             Cliente ativo
           </label>
+
+          <div>
+            <label className="mb-1 block text-sm font-medium text-neutral-300">
+              Contexto / Estratégia
+            </label>
+            <p className="mb-2 text-xs text-neutral-500">
+              Registre aqui nicho, tom de voz, objetivos, referências e qualquer coisa que ajude a
+              lembrar do contexto desse cliente.
+            </p>
+            <textarea
+              name="notes"
+              rows={10}
+              defaultValue={client.notes ?? ""}
+              className="w-full border border-neutral-700 bg-black px-3 py-2 text-sm text-white focus:border-orange-600 focus:outline-none"
+            />
+          </div>
+
           <button
             type="submit"
-            className="rounded-md bg-neutral-900 px-4 py-2 text-sm font-medium text-white hover:bg-neutral-700"
+            className="bg-orange-600 px-4 py-2 text-sm font-medium text-black hover:bg-orange-500"
           >
             Salvar alterações
           </button>
         </form>
       </div>
 
-      <div className="rounded-xl border border-neutral-200 bg-white p-6 shadow-sm">
+      <div className="border border-neutral-800 bg-neutral-950 p-6 shadow-sm">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-sm font-semibold text-neutral-900">Projetos</h2>
+          <h2 className="text-sm font-semibold text-white">Demandas recentes</h2>
           <Link
-            href={`/projetos/novo?client_id=${client.id}`}
-            className="text-xs font-medium text-neutral-600 hover:text-neutral-900"
+            href={`/demandas?client_id=${client.id}`}
+            className="text-xs font-medium text-neutral-400 hover:text-white"
           >
-            + Novo projeto
+            Ver todas
           </Link>
         </div>
         <ul className="space-y-2">
-          {(projects ?? []).map((project) => (
-            <li key={project.id} className="flex items-center justify-between text-sm">
-              <Link href={`/projetos/${project.id}`} className="text-neutral-900 hover:underline">
-                {project.name}
-              </Link>
+          {(demandas ?? []).map((demanda) => (
+            <li key={demanda.id} className="flex items-center justify-between text-sm">
+              <span className="text-white">{demanda.title}</span>
               <span
-                className={`rounded-full px-2 py-0.5 text-xs font-medium ${PROJETO_STATUS_BADGE[project.status as ProjetoStatus]}`}
+                className={`px-2 py-0.5 text-xs font-medium ${DEMANDA_STATUS_BADGE[demanda.status as DemandaStatus]}`}
               >
-                {PROJETO_STATUS_LABEL[project.status as ProjetoStatus]}
+                {DEMANDA_STATUS_LABEL[demanda.status as DemandaStatus]}
               </span>
             </li>
           ))}
-          {(projects ?? []).length === 0 && (
-            <p className="text-sm text-neutral-400">Nenhum projeto ainda.</p>
+          {(demandas ?? []).length === 0 && (
+            <p className="text-sm text-neutral-500">Nenhuma demanda ainda.</p>
           )}
         </ul>
       </div>
